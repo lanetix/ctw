@@ -5,7 +5,7 @@ export function handler (event, { succeed, fail }) {
   const request = API(event)
   const done = (e, res) => e ? fail(e) : succeed(res)
 
-  if (event.content.workflow !== 'fight_war') done(null, 'irrelevant workflow')
+  if (event.contents.workflow !== 'fight_war') done(null, 'irrelevant workflow')
 
   const chance_to_win = ({
     arm: 0.25,
