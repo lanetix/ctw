@@ -1,3 +1,4 @@
+require("babel-polyfill");
 import API from '../lib/api'
 
 export function handler (event, { succeed, fail }) {
