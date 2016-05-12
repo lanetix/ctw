@@ -2,7 +2,7 @@ require("babel-polyfill");
 import API from '../lib/api'
 
 export function handler (event, { succeed, fail }) {
-  const { contents: { recordId, recordType, toStage } } = event
+  const { lxMessage: { message: { contents: { recordId, recordType, toStage } } } } = event
   const request = API(event) // Extracts JWT from event, returns authenticated request function
   const done = (e, res) => e ? fail(e) : succeed(res)
 
