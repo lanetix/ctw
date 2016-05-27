@@ -2,7 +2,7 @@
   "lanetix": [{
     "event": {
       "name": "workflowPostStageAdvance",
-      "recordType": "war"
+      "recordType": "sure_start"
     },
     "environment": {
       "timeout": 100

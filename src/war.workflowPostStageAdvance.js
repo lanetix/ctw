@@ -2,11 +2,13 @@ require("babel-polyfill");
 import API from '../lib/api'
 
 export function handler (event, { succeed, fail }) {
-  const { lxMessage: { message: { contents: { recordId, recordType, toStage } } } } = event
+  const { lxMessage: { message: { contents: { recordId, recordType, toStage, workflow } } } } = event
   const request = API(event) // Extracts JWT from event, returns authenticated request function
   const done = (e, res) => e ? fail(e) : succeed(res)
 
-  if (event.contents.workflow !== 'fight_war') done(null, 'irrelevant workflow')
+  console.log(`event: ${JSON.stringify(event, null, 2)}`)
+
+  if (workflow.name !== 'sure_start') done(null, 'irrelevant workflow')
 
   const chance_to_win = ({
     'prospect': 0,
