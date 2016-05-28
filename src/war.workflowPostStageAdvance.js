@@ -1,10 +1,31 @@
 require("babel-polyfill");
 import API from '../lib/api'
 
+// {
+//     "id": "16483",
+//     "organizationId": 2731114,
+//     "userId": 2731180,
+//     "subject": "workflowPostStageAdvance",
+//     "payload": {
+//         "record": {
+//             "id": 12737030,
+//             "apiName": "project"
+//         },
+//         "workflow": {
+//             "apiName": "sure_start"
+//         },
+//         "fromStage": "qualified",
+//         "toStage": "proposed"
+//     },
+//     "jwt": "blah"
+// }
+
 export function handler (event, { succeed, fail }) {
   console.log(`event: ${JSON.stringify(event, null, 2)}`)
 
-  const { lxMessage: { message: { contents: { recordId, recordType, toStage, workflow } } } } = event
+  // recordId, recordType, toStage, workflow
+  //const { lxMessage: { message: { contents: { recordId, recordType, toStage, workflow } } } } = event
+  const { payload: { record: { id, apiName }, fromStage, toStage } } = event
   const request = API(event) // Extracts JWT from event, returns authenticated request function
   const done = (e, res) => e ? fail(e) : succeed(res)
 
@@ -21,7 +42,7 @@ export function handler (event, { succeed, fail }) {
 
   request({
     method: 'PATCH',
-    path: `/v1/records/${recordType}/${recordId}`,
+    path: `/v1/records/${apiName}/${id}`,
     body: { chance_to_win }
   }, done)
 }
