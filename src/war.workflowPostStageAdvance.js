@@ -40,9 +40,14 @@ export function handler (event, { succeed, fail }) {
     'stabilization': 0
   })[toStage]
 
+  console.log(`chance_to_win: ${chance_to_win}`)
+
   request({
     method: 'PATCH',
     path: `/v1/records/${apiName}/${id}`,
     body: { chance_to_win }
-  }, done)
+  }, function (err, res) {
+    console.log(`${err}, ${res}`)
+    done()
+  })
 }
