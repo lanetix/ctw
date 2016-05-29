@@ -49,7 +49,7 @@ export function handler (event, { succeed, fail }) {
     path: `/v1/records/${recordType}/${recordId}`,
     body: { chance_to_win }
   }, function (err, res) {
-    console.log(`${err}, ${res}`)
+    console.log(`err: ${err}, res: ${res}`)
     done()
   })
 }
